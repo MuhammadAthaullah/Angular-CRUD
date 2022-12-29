@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import Swal from 'sweetalert2';
 import { ExpenseEntryService } from '../../expense-entry.service';
 
 @Component({
@@ -59,17 +60,34 @@ export class EntryFormComponent implements OnInit {
   }
   onClickSubmit(data) {
     debugger;
-    if (this.id >= 0) {
-      this.expenseentryservice.getData[this.id] = data;
-      this.expenseentryservice.setID(null);
-      this.id = 0;
-      this.router.navigate(['/appeee']);
-      return;
-    }
+    this.formdata.markAllAsTouched();
+    if (this.formdata.valid) {
+      if (this.id >= 0) {
+        this.expenseentryservice.getData[this.id] = data;
+        this.expenseentryservice.setID(null);
+        this.id = 0;
+        this.router.navigate(['/appeee']);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Expense entry updated successfully',
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: false,
+        });
+        return;
+      }
 
-    this.expenseentryservice.setData(data);
-    //console.log(data)
-    this.router.navigate(['/appeee']);
-    console.log(this.expenseentryservice.getData);
+      this.expenseentryservice.setData(data);
+      //console.log(data)
+      this.router.navigate(['/appeee']);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Expense entry saved successfully',
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      console.log(this.expenseentryservice.getData);
+    }
   }
 }
