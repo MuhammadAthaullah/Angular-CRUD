@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import Swal from 'sweetalert2';
 import { EES } from '../ees';
 import { ExpenseEntryService } from '../expense-entry.service';
 
@@ -32,7 +33,29 @@ export class AppeeeComponent {
     this.router1.navigate(['/form']);
   }
   Delete(i) {
-    this.expensenseentry1.deleteID(i);
-    this.expenseEntry = this.expensenseentry1.getData;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Once deleted, data cannot be retrieved',
+      icon: 'question',
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: 'No',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.value) {
+        this.expensenseentry1.deleteID(i);
+        this.expenseEntry = this.expensenseentry1.getData;
+        //this.router.navigate(['/appeee']);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Expense entry deleted successfully',
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      } else {
+        return;
+      }
+    });
   }
 }
