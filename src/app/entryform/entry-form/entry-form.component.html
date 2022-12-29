@@ -1,0 +1,128 @@
+<div style="text-align: center">{{ Title }}</div>
+<div class="container-fluid">
+  <div class="container">
+    <div>
+      <form [formGroup]="formdata">
+        <label class="form-label">Id:</label>
+        <input
+          type="number"
+          name="id"
+          class="form-control"
+          placeholder="Please enter the id of the item"
+          formControlName="id"
+        />
+        <div
+          class="invalid"
+          *ngIf="formdata.get('id').invalid && formdata.get('id').touched"
+        >
+          <span>This field is required* </span>
+        </div>
+        <br />
+        <label class="form-label">Item:</label>
+
+        <input
+          type="text"
+          name="item"
+          class="form-control"
+          placeholder="Enter the name of the item"
+          formControlName="item"
+        />
+        <div
+          class="invalid"
+          *ngIf="formdata.get('item').invalid && formdata.get('item').touched"
+        >
+          <span>This field is required* </span>
+        </div>
+
+        <br />
+        <label class="form-label">Amount:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="amount"
+          placeholder="Enter the amount of the item"
+          formControlName="amount"
+        />
+        <div
+          class="invalid"
+          *ngIf="
+            formdata.get('amount').invalid && formdata.get('amount').touched
+          "
+        >
+          <span>This field is required* </span>
+        </div>
+
+        <br />
+        <label class="form-label">Category:</label>
+        <input
+          type="text"
+          name="category"
+          class="form-control"
+          placeholder="Enter the category of the item"
+          formControlName="category"
+        />
+        <div
+          class="invalid"
+          *ngIf="
+            formdata.get('category').invalid && formdata.get('category').touched
+          "
+        >
+          <span>This field is required* </span>
+        </div>
+
+        <br />
+        <label class="form-label">Location:</label>
+        <input
+          type="text"
+          name="location"
+          class="form-control"
+          placeholder="Enter the location of the item"
+          formControlName="location"
+        /><br />
+        <div
+          class="invalid"
+          *ngIf="
+            formdata.get('location').invalid && formdata.get('location').touched
+          "
+        >
+          <span>This field is required* </span>
+        </div>
+
+        <br />
+        <label class="form-label">Select Country:</label>
+        <br />
+        <select
+          formControlName="country"
+          placholder="Select Country"
+          class="form-select"
+        >
+          <option disabled selected>Select Country</option>
+          <option [value]="c" *ngFor="let c of countries">{{ c }}</option>
+        </select>
+        <div
+          class="invalid"
+          *ngIf="
+            formdata.get('country').invalid && formdata.get('country').touched
+          "
+        >
+          <span>This field is required* </span>
+        </div>
+
+        <br />
+        <br />
+        <div class="text-end">
+          <button
+            type="submit"
+            class="btn btn-success"
+            style="margin-right:10px"
+            (click)="onClickSubmit(formdata.value)"
+          >
+            Submit
+          </button>
+
+          <button type="reset" class="btn btn-danger">Clear data</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

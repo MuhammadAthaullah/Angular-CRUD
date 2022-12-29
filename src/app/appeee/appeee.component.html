@@ -1,0 +1,43 @@
+<div style="text-align: center">{{ Title }}</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Location</th>
+      <th>Country</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of expenseEntry; let i = index">
+      <th scope="row">{{ entry.id }}</th>
+      <th>{{ entry.item }}</th>
+      <th>{{ entry.amount }}</th>
+      <th>{{ entry.category }}</th>
+      <th>{{ entry.location }}</th>
+      <th>{{ entry.country }}</th>
+      <th>
+        <div>
+          <button
+            (click)="Edit(i)"
+            class="btn btn-primary"
+            style="margin-right:10px"
+          >
+            Edit
+          </button>
+          <button (click)="Delete(i)" class="btn btn-danger">Delete</button>
+        </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
+<br />
+<div style="text-align:right;">
+  <button (click)="goBack()" class="btn btn-primary" style="margin-right:20px">
+    Go Back
+  </button>
+</div>
